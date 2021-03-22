@@ -24,9 +24,9 @@ public class Bot {
           List<KeyboardButton> line1 = new ArrayList<>();
           line1.add(new KeyboardButton().setAction(new KeyboardButtonAction().setLabel("Начать").setType(KeyboardButtonActionType.TEXT)).setColor(KeyboardButtonColor.POSITIVE));
           line1.add(new KeyboardButton().setAction(new KeyboardButtonAction().setLabel("Неделя").setType(KeyboardButtonActionType.TEXT)).setColor(KeyboardButtonColor.POSITIVE));
-          line1.add(new KeyboardButton().setAction(new KeyboardButtonAction().setLabel("ИВТ3-20").setType(KeyboardButtonActionType.TEXT)).setColor(KeyboardButtonColor.POSITIVE));
           allKey.add(line1);
         keyboard.setButtons(allKey);
+
         GroupActor actor = new GroupActor(203426840, "00d2acc9e6c722caf98538144fa34f8f2ef1ce9629e9091c132e7d35d370eef0311ab386d7246c3e4f02f");
         Integer ts = vk.messages().getLongPollServer(actor).execute().getTs();
         while (true){
@@ -43,14 +43,14 @@ public class Bot {
                             vk.messages().send(actor).userId(message.getFromId()).randomId(random.nextInt(10000)).keyboard(keyboard).execute();
                         }
                         else if (message.getText().equals("Неделя")){
-                            vk.messages().send(actor).message("Идет "+TimeTest.SemesterWeek()+" учебная неделя.").userId(message.getFromId()).randomId(random.nextInt(10000)).execute();
+                            vk.messages().send(actor).message("Идет "+TimeTest.SemesterWeek()+" учебная неделя").userId(message.getFromId()).randomId(random.nextInt(10000)).execute();
                         }
                         else if (message.getText().toUpperCase().matches("^[А-Я]{3}[0-9]{1}[-]{1}[0-9]{2}$")) {
                             Data data = new Data();
                             vk.messages().send(actor).message(data.find(message.getText().toUpperCase())).userId(message.getFromId()).randomId(random.nextInt(10000)).execute();
                         }
                         else {
-                            vk.messages().send(actor).message("Неверный формат группы.").userId(message.getFromId()).randomId(random.nextInt(10000)).execute();
+                            vk.messages().send(actor).message("Неверный формат группы").userId(message.getFromId()).randomId(random.nextInt(10000)).execute();
                         }
                     }
                     catch (ApiException | ClientException | IOException e) {e.printStackTrace();}
